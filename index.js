@@ -83,7 +83,18 @@ async function run() {
             res.send(result);
         });
 
-        
+        // Reorder Tasks
+        app.post('/tasks/reorder', async (req, res) => {
+            const { userID, category, reorderedTasks } = req.body;
+            const bulkOps = reorderedTasks.map((task, index) => ({
+                updateOne: {
+                    filter: { _id: new ObjectId(task._id), userID, category },
+                    update: { $set: { order: index + 1 } }
+                }
+            }));
+            const result = await taskCollection.bulkWrite(bulkOps);
+            res.send(result);
+        });
 
         // Send a ping to confirm a successful connection
         await client.db('admin').command({ ping: 1 });
