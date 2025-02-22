@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: ['http://localhost:5173/', 'https://task-management-client-e78f5.web.app', 'https://task-management-client-e78f5.firebaseapp.com'],
+        origin: ['http://localhost:5173', 'https://task-management-client-e78f5.web.app', 'https://task-management-client-e78f5.firebaseapp.com'],
         credentials: true
     })
 );
